@@ -1,0 +1,25 @@
+{
+  "name": "bloodhoundcli",
+  "version": "1.0.0",
+  "description": "A TypeScript CLI tool to hunt down forgotten code annotations and technical debt across any project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vulturu1/Bloodhound.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Vulturu1/Bloodhound/issues"
+  },
+  "homepage": "https://github.com/Vulturu1/Bloodhound#readme",
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "typescript": "^6.0.3"
+  }
+}
