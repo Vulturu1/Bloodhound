@@ -1,4 +1,6 @@
-import { Annotation, ScanOptions, NonCodeFileExtension, CodeFileExtension, AnnotationType, ReportFileType } from "./types";
+import { Annotation, ScanOptions, NonCodeFileExtension, CodeFileExtension, ReportFileType } from "./types";
+import { scanFiles, parseFile } from "./scanner";
+import { generateReport } from "./reporter";
 
 const args = process.argv.slice(2);
 
@@ -38,3 +40,8 @@ const scanOptions: ScanOptions = {
         : undefined,
     outputDirectory: outputDirectory
 }
+
+const matchingFilePaths: string[] = scanFiles(scanOptions.scanDirectory, scanOptions.extensions);
+const allAnnotations: Annotation[] = matchingFilePaths.flatMap(filePath => parseFile(filePath));
+
+generateReport(allAnnotations, scanOptions);
