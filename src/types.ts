@@ -54,6 +54,16 @@ export interface Annotation {
     filePath: string;
 }
 
+export interface AnnotationGroupByType {
+    annotationType: AnnotationType;
+    groupedAnnotations: Annotation[];
+}
+
+export interface AnnotationGroupByFile {
+    annotationPath: string;
+    groupedAnnotations: Annotation[];
+}
+
 export interface ScanOptions {
     scanDirectory: string;
     extensions: (CodeFileExtension | NonCodeFileExtension)[];
