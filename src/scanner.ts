@@ -22,9 +22,12 @@ export function parseFile(filePath: string): Annotation[] {
     lines.forEach((line, index) => {
         const lineNum = index + 1;
         const words = line.split(" ");
-        const annotationIndex: number = words.findIndex(word => Object.values(AnnotationType).includes(word as AnnotationType));
+        const annotationIndex: number = words.findIndex(word => {
+            const cleaned = word.replace(/[/:#*]/g, "").trim();
+            return Object.values(AnnotationType).includes(cleaned as AnnotationType);
+        });
         if (annotationIndex !== -1) {
-            const annotationType = words[annotationIndex] as AnnotationType;
+            const annotationType = words[annotationIndex]!.replace(/[/:#*]/g, "").trim() as AnnotationType;
             const comment = words.slice(annotationIndex + 1).join(" ").trim() || "No comment";
             const annotation: Annotation = {
                 annotationType: annotationType,

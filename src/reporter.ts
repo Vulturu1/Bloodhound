@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { Annotation, AnnotationType, ScanOptions, AnnotationGroupByFile, AnnotationGroupByType, ReportFileType } from "./types";
 
-export function formatByType(annotations: Annotation[]): AnnotationGroupByType[] {
+function formatByType(annotations: Annotation[]): AnnotationGroupByType[] {
     const grouped: AnnotationGroupByType[] = []
     for (const annoType of Object.values(AnnotationType)) {
         const outputAnnos = annotations.filter(annotation => annotation.annotationType === annoType);
@@ -16,7 +16,7 @@ export function formatByType(annotations: Annotation[]): AnnotationGroupByType[]
     return grouped;
 }
 
-export function formatByFile(annotations: Annotation[]): AnnotationGroupByFile[] {
+function formatByFile(annotations: Annotation[]): AnnotationGroupByFile[] {
     const grouped: AnnotationGroupByFile[] = [];  // Type unknown
     const uniquePaths = [...new Set(annotations.map(a => a.filePath))];
     for (const filePath of uniquePaths) {

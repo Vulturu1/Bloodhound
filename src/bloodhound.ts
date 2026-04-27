@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Annotation, ScanOptions, NonCodeFileExtension, CodeFileExtension, ReportFileType } from "./types";
 import { scanFiles, parseFile } from "./scanner";
 import { generateReport } from "./reporter";
@@ -42,6 +44,8 @@ const scanOptions: ScanOptions = {
 }
 
 const matchingFilePaths: string[] = scanFiles(scanOptions.scanDirectory, scanOptions.extensions);
+console.log("Files found:", matchingFilePaths);
 const allAnnotations: Annotation[] = matchingFilePaths.flatMap(filePath => parseFile(filePath));
+console.log("Annotations found:", allAnnotations.length);
 
 generateReport(allAnnotations, scanOptions);

@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Compiled output
+dist/
+
+# Map files
+src/**/*.js
+src/**/*.js.map
+src/**/*.ts.map
+src/**/*.d.ts
+
+# Binaries
+binaries/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test_files/
