@@ -27,17 +27,25 @@ if not exist "%~dp0bloodhound-win.exe" (
     exit /b 1
 )
 
-:: Copy binary to a directory on PATH
+:: Create install directory
 set "INSTALL_DIR=%ProgramFiles%\Bloodhound"
 if not exist "%INSTALL_DIR%" mkdir "%INSTALL_DIR%"
-copy /Y "%~dp0bloodhound-win.exe" "%INSTALL_DIR%\bloodhound.exe"
 
-:: Add to PATH if not already there
-echo %PATH% | find /i "%INSTALL_DIR%" >nul
-if %errorLevel% neq 0 (
-    setx /M PATH "%PATH%;%INSTALL_DIR%"
-    echo Added Bloodhound to PATH.
-)
+:: Copy binary
+copy /Y "%~dp0bloodhound-win.exe" "%INSTALL_DIR%\bloodhound.exe"
+echo Copied bloodhound.exe to %INSTALL_DIR%
+
+:: Safely add literal install path to PATH using PowerShell array splitting
+:: This avoids corrupting existing PATH entries
+%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -Command ^
+    "$installDir = '%INSTALL_DIR%';" ^
+    "$currentPath = [Environment]::GetEnvironmentVariable('Path', 'Machine');" ^
+    "$entries = $currentPath -split ';';" ^
+    "if ($entries -notcontains $installDir) {" ^
+    "    $newPath = ($entries + $installDir) -join ';';" ^
+    "    [Environment]::SetEnvironmentVariable('Path', $newPath, 'Machine')" ^
+    "}"
+echo Added Bloodhound to system PATH.
 
 echo.
 echo  Bloodhound installed successfully!

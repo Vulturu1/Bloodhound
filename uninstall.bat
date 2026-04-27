@@ -31,18 +31,13 @@ if not exist "%INSTALL_DIR%" (
 rmdir /S /Q "%INSTALL_DIR%"
 echo Removed installation folder.
 
-:: Remove from PATH
-set "NEW_PATH="
-for %%i in ("%PATH:;=" "%") do (
-    if /I not "%%~i"=="%INSTALL_DIR%" (
-        if defined NEW_PATH (
-            set "NEW_PATH=%NEW_PATH%;%%~i"
-        ) else (
-            set "NEW_PATH=%%~i"
-        )
-    )
-)
-setx /M PATH "%NEW_PATH%"
+:: Safely remove Bloodhound from PATH using PowerShell array splitting
+%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -Command ^
+    "$installDir = '%INSTALL_DIR%';" ^
+    "$currentPath = [Environment]::GetEnvironmentVariable('Path', 'Machine');" ^
+    "$entries = $currentPath -split ';';" ^
+    "$newPath = ($entries | Where-Object { $_ -ne $installDir }) -join ';';" ^
+    "[Environment]::SetEnvironmentVariable('Path', $newPath, 'Machine')"
 echo Removed Bloodhound from PATH.
 
 echo.
