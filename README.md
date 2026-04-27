@@ -1,8 +1,8 @@
-# Bloodhound
+# 🐕 Bloodhound
 > Hunt down forgotten code annotations and technical debt across any project.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-ISC-green)
+![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)
 
 ---
@@ -20,7 +20,7 @@ Bloodhound is a standalone CLI tool that scans codebases for annotation comments
 1. Go to the [Releases](https://github.com/Vulturu1/Bloodhound/releases) page
 2. Download `bloodhound-win.exe` and `install.bat` into the same folder
 3. Right-click `install.bat` and select **Run as administrator**
-4. Open a new terminal and run:
+4. Open a **new** terminal and run:
 ```
 bloodhound sniff
 ```
@@ -36,6 +36,23 @@ chmod +x install.sh && sudo ./install.sh
 4. Run:
 ```bash
 bloodhound sniff
+```
+
+---
+
+## Uninstallation
+
+### Windows
+
+1. Download `uninstall.bat` from the [Releases](https://github.com/Vulturu1/Bloodhound/releases) page
+2. Right-click `uninstall.bat` and select **Run as administrator**
+
+### macOS / Linux
+
+1. Download `uninstall.sh` from the [Releases](https://github.com/Vulturu1/Bloodhound/releases) page
+2. Open a terminal in that folder and run:
+```bash
+chmod +x uninstall.sh && sudo ./uninstall.sh
 ```
 
 ---
@@ -171,4 +188,4 @@ Binaries will be output to the `binaries/` folder.
 
 ## License
 
-ISC © Vulturu1
+MIT © Vulturu1
